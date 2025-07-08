@@ -30,3 +30,8 @@ Similarly to Part Four, we can use gdb to view register values. Again we are tar
 
 ## Part Six
 
+This time, I examined the executable's assembly instructions using _objdump_. There are two functions of note: compare_pwd() and my_secure_test(). It seems this time the author has hidden the password value more carefully.
+
+Next, I disassembled the program using Ghidra. We can see from the code generated that main() calls compare_pwd(), which calls my_secure_test(). 
+
+my_secure_test() compares the user input to an 8-character value, one character at a time. Putting these characters together as a string gives us the password.
