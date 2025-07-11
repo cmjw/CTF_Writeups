@@ -50,4 +50,8 @@ Taking a look at the decompiled main(), we can see the program checks the value 
 
 # Conclusions
 
-This was an excellent introduction to reverse engineering for CTF participants. One of the key takeaways for me is the difference between *disassembly* and *decompilation*. Disassembly translates machine code to assembly language, whereas decompilation translates assembly code into a reconstructed version of the higher-level source code.
+This was an excellent introduction to reverse engineering for CTF participants. 
+
+One key takeaway is the difference between static and dynamic analysis. Static analysis examines the code itself - be it machine code, assembly code, or source code. Dynamic analysis examines a program during execution - for example taking note of how different inputs produce different results, or examining register values at runtime.
+
+Another takeaway is the difference between *disassembly* and *decompilation*. Disassembly translates machine code to assembly language, whereas decompilation translates assembly code into a reconstructed version of the higher-level source code.
