@@ -35,3 +35,9 @@ This time, I examined the executable's assembly instructions using _objdump_. Th
 Next, I disassembled the program using Ghidra. We can see from the code generated that main() calls compare_pwd(), which calls my_secure_test(). 
 
 my_secure_test() compares the user input to an 8-character value, one character at a time. Putting these characters together as a string gives us the password.
+
+## Part Seven
+
+This exercise is similar to par six. First, I examined the functions in the program using gdb, where I noticed the function getflag().
+
+Next, I used Ghidra to disassemble and decompile the program. The decompiled code of getflag() is not very useful. Instead, I examined the decompiled main(). We can see there is a secret fourth input option, which will print a message and call giveflag(). This special value is 0x7a69, or 0d31337. Entering this as a menu option gives us the flag.
