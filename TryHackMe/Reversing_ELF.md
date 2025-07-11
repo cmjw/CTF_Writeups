@@ -41,3 +41,13 @@ my_secure_test() compares the user input to an 8-character value, one character 
 This exercise is similar to par six. First, I examined the functions in the program using gdb, where I noticed the function getflag().
 
 Next, I used Ghidra to disassemble and decompile the program. The decompiled code of getflag() is not very useful. Instead, I examined the decompiled main(). We can see there is a secret fourth input option, which will print a message and call giveflag(). This special value is 0x7a69, or 0d31337. Entering this as a menu option gives us the flag.
+
+## Part Eight
+
+Part eight is once again similar to the last few programs. I used Ghidra to disassemble the program, noticing a getflag() function again. Decompiling this function does not reveal much. 
+
+Taking a look at the decompiled main(), we can see the program checks the value of the first command-line argument. There is a simple check: if this value is -0x35010ff3, call giveflag(). All we need to do is convert this value to decimal, and invoke crackme8 with this value as a command-line argument.
+
+# Conclusions
+
+This was an excellent introduction to reverse engineering for CTF participants. One of the key takeaways for me is the difference between *disassembly* and *decompilation*. Disassembly translates machine code to assembly language, whereas decompilation translates assembly code into a reconstructed version of the higher-level source code.
