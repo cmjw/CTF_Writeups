@@ -17,4 +17,8 @@ We are given a program that asks for a password. The user is tasked with finding
 - Changing the 6th bit to little endian does! The file is now recognized at an ELF 64-bit pie executable in x86-64
 
 - Now we can try disassembing using Ghidra.
-- 
+- Examining the entry point, we can see a call to a pointer containing some function address. Before this, we see the address of RUN_00101165 loaded into RDI.
+- Examining the decompiled code of this function, we see the familiar text asking for and verifying the password.
+- After getting user input, the program first checks if it is the correct length.
+- Next, it checks each character of the input against the correct password, stored in local_le.
+- Going back the beginning of this function, we can see the variable local_le is set using strncpy to a string value, which is the correct password!
