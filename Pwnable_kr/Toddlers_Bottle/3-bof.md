@@ -38,3 +38,7 @@ Putting it all together
 * The difference between the two addresses is 0x34, or 0d52.
 * Thus, now we know there are 52 bytes in between the start of the buffer and key.
 * So we need to provide the program with a value of 52 arbitrary bytes, plus the value 0xcafebabe (in little endian)!
+
+Obtaining the flag
+* To finally obtain the flag, I used the following command: (python2 -c "print '\xab'*52 + '\xbe\xba\xfe\xca'"; cat) | nc 0 9000
+* Then, you can *cat* the flag.
