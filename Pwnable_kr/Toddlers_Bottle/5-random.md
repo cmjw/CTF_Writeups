@@ -11,3 +11,5 @@ The C standard library function rand() is a pseudorandom number generator, meani
 I made a copy of the random.c file in the tmp/ directory on the server. I did this instead of copying the file to my own machine because the implemenation of rand() is specific to that machine (notice there was no stdlib.h include).
 
 By editing the program to print out the current value of random, we can see it is the same value each time: 0x6b8b4567. Now that we know *random* remains constant over each run, we only need to determine the value of *key* such that (key ^ random) == 0xcafebabe.
+
+The reverse of XOR is XOR, so we can calculate key = random XOR 0xcafebabe. This comes out to 0xa175ffd9, but since the program reads the input as a decimal value, we can enter its equivalent 0d2708864985.
