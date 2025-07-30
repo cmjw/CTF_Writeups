@@ -55,3 +55,17 @@ Similar to the previous level, we are given a large file *data.txt* that contain
 We can use *uniq* with the *-u* option to list unique (non-repeated) lines. However, *uniq* only detects *adjacent* repeated lines, so we need to sort the contents of *data.txt* before providing them to *uniq*, for example using the *sort* command.
 
 Combining all of this: we can pipe the sorted contents of *data.txt* to *uniq*, returning only the unique line(s). I used the command *$sort data.txt | uniq -u*.
+
+## Level 9 
+
+We are given a hint that the key is preceded by several "=" characters. Investing *data.txt*, this time it is in binary format. To search a binary file as if it was text, we can use the *grep* "-a" option. I searched for the "=" character using the following command: *$grep -a "=" data.txt*.
+
+## Level 10
+
+This time the key is encoded, specifically in base64 format. We can use the *base64* program to decode *data.txt* as follows: *$base64 -d data.txt*.
+
+## Level 11
+
+We are given a hint that the key is encoded using the ROT13 cipher. This cipher applied to alphabetic text shifts each character by 13. Since there are 26 letters in the alphabet, we can apply another round of ROT to "undo" the encoding.
+
+Thus, we need to shift alphabetic characters (uppercase and lowercase) 13 characters, wrapping back around from Z to A. In other words, we need to map A-Z to N-ZA-M, and a-z to n-za-m. We could reverse this encoding by using an already-built tool, but why not try it ourselves? I solved this challenge using the following command: *$ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'*.
