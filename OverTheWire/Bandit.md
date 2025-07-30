@@ -69,3 +69,21 @@ This time the key is encoded, specifically in base64 format. We can use the *bas
 We are given a hint that the key is encoded using the ROT13 cipher. This cipher applied to alphabetic text shifts each character by 13. Since there are 26 letters in the alphabet, we can apply another round of ROT to "undo" the encoding.
 
 Thus, we need to shift alphabetic characters (uppercase and lowercase) 13 characters, wrapping back around from Z to A. In other words, we need to map A-Z to N-ZA-M, and a-z to n-za-m. We could reverse this encoding by using an already-built tool, but why not try it ourselves? I solved this challenge using the following command: *$ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'*.
+
+## Level 12
+
+I first copied *data.txt* into a temporary directory, renaming it *hexdump*. I then reverse the hexdump, putting the contents in a file called *reversed* (using *xxd -r hexdump reversed).
+
+Since we know the hexdump comes from a compressed file, we can examine the header to determine which compression format was used. The first two bytes are "1F 8B", which matches the signature for the *gzip* format (determined using this [list](https://en.wikipedia.org/wiki/List_of_file_signatures) of signatures). 
+
+If we attempt to decompress this data as-is, we get a warning from *gzip*: "unknown suffix". We need to rename the file with a .gz suffix, then we can decompress it as *data1*.
+
+This file is still compressed. A hexdump of *data1* reveals this file is compressed in the bzip2 format. We know this because the signature matches this format. 
+
+Again, the result file is compressed. This time it is gzip format. Again, we can rename the file and decompress it.
+
+This time we have an archive. We can rename with the .tar extension and extract to data5.bin. (Use *xxd <> | head* to dump the header.) Again we can extract to data6.bin.
+
+Once again we have a bzip2 file to decompress. Then an archive to extract. Next, a gzip compressed file.
+
+Finally, the file is in human-readable format, and we have our next key!
