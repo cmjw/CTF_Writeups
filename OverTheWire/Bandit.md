@@ -1,5 +1,7 @@
 # Bandit
 
+Located at https://overthewire.org/wargames/bandit/
+
 ## Level 0
 
 Connect to the server specified in the Level 0 description. To connect to an ssh server, use the command $ssh <user>@<domain> -p<port_number>.
