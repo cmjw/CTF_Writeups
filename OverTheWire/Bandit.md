@@ -41,3 +41,17 @@ Another method to search by file size is to use the *find* command, for example 
 ## Level 6
 
 We need to find a file that is 1) owned by user *bandit7*, 2) owned by group *bandit6*, and 3) 33 B in size. We can use the *find* command, and specify the user and group. Since the key may be anywhere on the server, we need to specify the entire server as the search directory. I used the command *$find . -user bandit7 -group bandit6 -size 33c*, which returned one file.
+
+## Level 7
+
+For this level, we are given a file, *data.txt*, with several lines in the format of <keyword> <key>. We are told the correct key is preceded by the keyword "millionth".
+
+We can use *grep* to search for a matching string: *$grep "millionth" data.txt*.
+
+## Level 8
+
+Similar to the previous level, we are given a large file *data.txt* that contains several possible keys. Our hint is that the correct key only occurs once in the file. So, we need to filter the contents of the file to find the line that only occurs once.
+
+We can use *uniq* with the *-u* option to list unique (non-repeated) lines. However, *uniq* only detects *adjacent* repeated lines, so we need to sort the contents of *data.txt* before providing them to *uniq*, for example using the *sort* command.
+
+Combining all of this: we can pipe the sorted contents of *data.txt* to *uniq*, returning only the unique line(s). I used the command *$sort data.txt | uniq -u*.
