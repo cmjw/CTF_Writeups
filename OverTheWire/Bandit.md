@@ -4,7 +4,7 @@
 
 ## Level 0
 
-Connect to the server specified in the Level 0 description. To connect to an ssh server, use the command $ssh <user>@<domain> -p <port_number>.
+Connect to the server specified in the Level 0 description. To connect to an ssh server, use the command $ssh <user>@<domain> -p<port_number>.
 
 To find the password for Level 1, read the file "readme". For example, use the *cat* command.
 
