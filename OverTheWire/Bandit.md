@@ -35,3 +35,7 @@ In the directory *inhere*, we are tasked with finding a file with the following 
 There are a few methods to find such a file. First, I used the command *$du -ab .* to list the size of all sub-directories and files. We can see most files have a unique size. One method would be to comb through this list to find any file 1033 B large.
 
 Another method to search by file size is to use the *find* command, for example *find . -size 1033c*. This search returns one file. Using the *file* command, we see the file is ASCII text, meaning it is not executable. And viewing its contents, we see it is human-readable. So we can conclude we have found the next key.
+
+## Level 6
+
+We need to find a file that is 1) owned by user *bandit7*, 2) owned by group *bandit6*, and 3) 33 B in size. We can use the *find* command, and specify the user and group. Since the key may be anywhere on the server, we need to specify the entire server as the search directory. I used the command *$find . -user bandit7 -group bandit6 -size 33c*, which returned one file.
