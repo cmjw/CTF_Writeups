@@ -4,7 +4,9 @@
 
 * We can execute the binary using $nc 0 9000
 * The program requests an input value.
-* TO obtain the flag, the *key* variable must be equal to 0xcafebabe.
+* To obtain the flag, the *key* variable must be equal to 0xcafebabe.
+
+## Approach
 * Examining the source code, we see the input is obtained using gets() into the buffer overflowme.
 * The gets() has a known vulnerability that it fails to detect a buffer overflow.
 * Since the buffer is a char array of 32, we need to overflow the buffer past the 32 characters expected.
