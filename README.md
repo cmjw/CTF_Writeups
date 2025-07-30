@@ -4,5 +4,5 @@
 
 ## Wargames
 
-[Over The Wire](https://overthewire.org)
-[Pwnable.kr](https://pwnable.kr)
+* [Over The Wire](https://overthewire.org)
+* [Pwnable.kr](https://pwnable.kr)
