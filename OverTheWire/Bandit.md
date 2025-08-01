@@ -99,3 +99,43 @@ I copied the private key from *sshkey.private* on bandit13 to my ~/.ssh director
 Aftering sshing into the server as the bandit14 user, the next key is located at /etc/bandit_pass/bandit14. We need to send this key (the bandit14 password) to port 30000 on localhost to obtain the next key.
 
 We can use *nc* (netcat) to connect to the port specified to send the password: *nc 127.0.0.1 30000*. When connected, enter the password for bandit14, and the response will contain the password for bandit15.
+
+## Level 15
+
+This time we need to connect to port 30001 on localhost using SSL/TLS encryption. The program *ncat* expands *nc*, for example adding support for SSL-encrypted connections. 
+
+I used the following command: *ncat --ssl 127.0.0.1 30001*, and entered the passcode to bandit15.
+
+## Level 16
+
+We need to submit the bandit16 password to a port on localhost in the range 31000 to 32000 - but we do not know which one. The correct port will have a server listening on it, and will use SSL/TLS.
+
+We can use *nmap* to scan for open ports. In this case, we are looking for ports on localhost (127.0.0.1) from 31000 to 32000 that use SSL/TLS. I used the command *nmap -sT -v --script ssl-cert 127.0.0.1 -p31000-32000* to target these criteria. *nmap* returns two listening ports: 31518 and 31790. 
+
+I connected to each port using *ncat --ssl 127.0.0.1 <port>*, and upon entering the bandit16 password, port 31790 responds with a private ssh key.
+
+## Level 17
+
+Similar to Level 13, we need to configure a private SSH key. I copied the contents of the private key to ~/.ssh/id_rsa_bandit17, modifying permissions with *chmod 600*. 
+
+I then modified *~/.ssh/config*, adding a section for this key: 
+
+```
+Host bandit.labs.overthewire.org
+HostName bandit.labs.overthewire.org
+IdentityFile ~/.ssh/id_rsa_bandit17
+User bandit17
+IdentitiesOnly yes
+```
+
+Now we can SSH into bandit17.
+
+As the description hints, the password for the next level can be obtained using the *password.new* and *password.old*. The next password is the line that differs in *password.new* compared to *password.old*. 
+
+We can use the *diff* program to compare the two files: *diff password.new password.old*.
+
+## Level 18
+
+Using the password obtained in the previous level to SSH into bandit18, we notice we are immediately logged out. As the description states, .bashrc has been modified to log the user (us) out when we log in.
+
+We know the password is stored in a file *readme* on the server. If we use the command *ssh bandit18@bandit.labs.overthewire.org -p2220 ls -al*, we receive back the result of the *ls -al* command, confirming the *readme* file exists, without establishing a shell ssh connection. Similarly to cat out the flag, we can execute the following command: *ssh bandit18@bandit.labs.overthewire.org -p2220 cat readme*, bypassing the modifications to *.bashrc*.
