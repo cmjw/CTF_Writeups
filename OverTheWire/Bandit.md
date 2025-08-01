@@ -72,7 +72,7 @@ Thus, we need to shift alphabetic characters (uppercase and lowercase) 13 charac
 
 ## Level 12
 
-I first copied *data.txt* into a temporary directory, renaming it *hexdump*. I then reverse the hexdump, putting the contents in a file called *reversed* (using *xxd -r hexdump reversed).
+I first copied *data.txt* into a temporary directory, renaming it *hexdump*. I then reverse the hexdump, putting the contents in a file called *reversed* (using *xxd -r hexdump reversed*).
 
 Since we know the hexdump comes from a compressed file, we can examine the header to determine which compression format was used. The first two bytes are "1F 8B", which matches the signature for the *gzip* format (determined using this [list](https://en.wikipedia.org/wiki/List_of_file_signatures) of signatures). 
 
@@ -87,3 +87,7 @@ This time we have an archive. We can rename with the .tar extension and extract 
 Once again we have a bzip2 file to decompress. Then an archive to extract. Next, a gzip compressed file.
 
 Finally, the file is in human-readable format, and we have our next key!
+
+## Level 13
+
+This time, we are given a private SSH key to use to connect to Level 14. We need to configure this private key correctly on our host machine to access the server at bandit13@bandit.labs.overthewire.org.
