@@ -96,5 +96,6 @@ I copied the private key from *sshkey.private* on bandit13 to my ~/.ssh director
 
 ## Level 14
 
-Aftering sshing into the server as the bandit14 user, the next key is located at /etc/bandit_pass/bandit14.
+Aftering sshing into the server as the bandit14 user, the next key is located at /etc/bandit_pass/bandit14. We need to send this key (the bandit14 password) to port 30000 on localhost to obtain the next key.
 
+We can use *nc* (netcat) to connect to the port specified to send the password: *nc 127.0.0.1 30000*. When connected, enter the password for bandit14, and the response will contain the password for bandit15.
