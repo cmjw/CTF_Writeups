@@ -91,3 +91,5 @@ Finally, the file is in human-readable format, and we have our next key!
 ## Level 13
 
 This time, we are given a private SSH key to use to connect to Level 14. We need to configure this private key correctly on our host machine to access the server at bandit13@bandit.labs.overthewire.org.
+
+I copied the private key from *sshkey.private* on bandit13 to my ~/.ssh directory as *id_rsa*. To make sure no other user has r/w/x permission, we can execute *chmod 600 id_rsa*. Now when we ssh into bandit14, we are not asked for a password, and are connected via the ssh key.
