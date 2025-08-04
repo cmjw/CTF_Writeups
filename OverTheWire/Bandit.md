@@ -36,7 +36,13 @@ In the directory *inhere*, we are tasked with finding a file with the following 
 
 There are a few methods to find such a file. First, I used the command *$du -ab .* to list the size of all sub-directories and files. We can see most files have a unique size. One method would be to comb through this list to find any file 1033 B large.
 
-Another method to search by file size is to use the *find* command, for example *find . -size 1033c*. This search returns one file. Using the *file* command, we see the file is ASCII text, meaning it is not executable. And viewing its contents, we see it is human-readable. So we can conclude we have found the next key.
+Another method to search by file size is to use the *find* command, for example:
+
+```
+$find . -size 1033c
+```
+
+This search returns one file. Using the *file* command, we see the file is ASCII text, meaning it is not executable. And viewing its contents, we see it is human-readable. So we can conclude we have found the next key.
 
 ## Level 6
 
@@ -138,4 +144,33 @@ We can use the *diff* program to compare the two files: *diff password.new passw
 
 Using the password obtained in the previous level to SSH into bandit18, we notice we are immediately logged out. As the description states, .bashrc has been modified to log the user (us) out when we log in.
 
-We know the password is stored in a file *readme* on the server. If we use the command *ssh bandit18@bandit.labs.overthewire.org -p2220 ls -al*, we receive back the result of the *ls -al* command, confirming the *readme* file exists, without establishing a shell ssh connection. Similarly to cat out the flag, we can execute the following command: *ssh bandit18@bandit.labs.overthewire.org -p2220 cat readme*, bypassing the modifications to *.bashrc*.
+We know the password is stored in a file *readme* on the server. If we use the command 
+
+```
+$ ssh bandit18@bandit.labs.overthewire.org -p2220 ls -al
+```
+
+we receive back the result of the *ls -al* command, confirming the *readme* file exists, without establishing a shell ssh connection. Similarly to cat out the flag, we can execute the following command, bypassing the modifications to *.bashrc*.
+
+```
+$ ssh bandit18@bandit.labs.overthewire.org -p2220 cat readme
+```
+
+## Level 19
+
+For this level, we are given a binary, *bandit20-do*, that uses *setuid* to execute a subsequent command as another user- bandit20. As stated in the description, we know the password for bandit20 is located at /etc/bandit_pass/bandit20.
+
+We can see the file is read-only for the user *bandit20*:
+
+```
+-r--------   1 bandit20 bandit20    33 Jul 28 19:03 bandit20
+```
+
+Using the *bandit20-do* binary, we can *cat* out the contents of the file by executing the command as the bandit20 user:
+
+```
+$ ./bandit20-do cat /etc/bandit_pass/bandit20
+```
+
+I found the following site useful for learning more about *setuid*: https://www.liquidweb.com/blog/how-do-i-set-up-setuid-setgid-and-sticky-bits-on-linux/.
+
